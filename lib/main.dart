@@ -8,20 +8,7 @@ void main() => runApp(
           GlobalMaterialLocalizations.delegate,
         ],
         title: 'Calculadora de Idade',
-        home: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.orange,
-            title: Text(
-              'Calculadora de Idade',
-            ),
-          ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.all(20),
-              child: FormAndLabels(),
-            ),
-          ),
-        ),
+        home: FormAndLabels(),
       ),
     );
 
@@ -68,68 +55,105 @@ class _FormAndLabelsState extends State<FormAndLabels> {
 
     print('Birth date chosen: $_birthdayDateButtonText');
 
-    setState(() {
-      return _birthdayDate;
-    });
+    setState(() {});
+  }
+
+  void _resetField() {
+    _birthdayDateButtonText = 'Sua Data de Nascimento';
+
+    _timeAliveInDays = 0;
+    _timeAliveInHours = 0;
+    _timeAliveInMinutes = 0;
+    _timeAliveInSeconds = 0;
+    _timeAliveInMilliseconds = 0;
+    _timeAliveInMicroseconds = 0;
+
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        TextButton(
-          style: TextButton.styleFrom(
-            padding: EdgeInsets.only(bottom: 20),
-          ),
-          onPressed: _getBirthdayDate,
-          child: Container(
-            padding: EdgeInsets.only(top: 13, bottom: 13),
-            color: Colors.orange,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(right: 20),
-                  child: Text(
-                    _birthdayDateButtonText,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                    ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.orange,
+        title: Text(
+          'Calculadora de Idade',
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              TextButton(
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.only(bottom: 20),
+                ),
+                onPressed: _getBirthdayDate,
+                child: Container(
+                  padding: EdgeInsets.only(top: 13, bottom: 13),
+                  color: Colors.orange,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(right: 20),
+                        child: Text(
+                          _birthdayDateButtonText,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                      Icon(
+                        Icons.calendar_today_outlined,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                    ],
                   ),
                 ),
-                Icon(
-                  Icons.calendar_today_outlined,
-                  color: Colors.white,
-                  size: 30,
-                ),
-              ],
-            ),
-          ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.orange,
-            borderRadius: BorderRadius.all(
-              Radius.circular(
-                35,
               ),
-            ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              getTextLabeled('Dias: $_timeAliveInDays'),
-              getTextLabeled('Horas: $_timeAliveInHours'),
-              getTextLabeled('Minutos: $_timeAliveInMinutes'),
-              getTextLabeled('Segundos: $_timeAliveInSeconds'),
-              getTextLabeled('Milisegundos: $_timeAliveInMilliseconds'),
-              getTextLabeled('Microsegundos: $_timeAliveInMicroseconds'),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.orange,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(35),
+                    bottomRight: Radius.circular(35),
+                    topRight: Radius.circular(10),
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    getTextLabeled('Dias: $_timeAliveInDays'),
+                    getTextLabeled('Horas: $_timeAliveInHours'),
+                    getTextLabeled('Minutos: $_timeAliveInMinutes'),
+                    getTextLabeled('Segundos: $_timeAliveInSeconds'),
+                    getTextLabeled('Milisegundos: $_timeAliveInMilliseconds'),
+                    getTextLabeled('Microsegundos: $_timeAliveInMicroseconds'),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                  top: 30,
+                ),
+                child: IconButton(
+                  icon: Icon(
+                    Icons.refresh,
+                    color: Colors.orange,
+                  ),
+                  onPressed: _resetField,
+                  iconSize: 50,
+                ),
+              ),
             ],
           ),
         ),
-      ],
+      ),
     );
   }
 }
