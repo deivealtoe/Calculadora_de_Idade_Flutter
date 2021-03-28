@@ -138,6 +138,29 @@ class _FormAndLabelsState extends State<FormAndLabels> {
                 ),
               ),
               Padding(
+                padding: EdgeInsets.only(top: 50),
+                child: OutlinedButton(
+                  onPressed: _resetField,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Limpar',
+                        style: TextStyle(
+                          color: Colors.orange,
+                          fontSize: 25,
+                        ),
+                      ),
+                      Icon(
+                        Icons.refresh,
+                        size: 50,
+                        color: Colors.orange,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              /*Padding(
                 padding: EdgeInsets.only(
                   top: 30,
                 ),
@@ -149,7 +172,7 @@ class _FormAndLabelsState extends State<FormAndLabels> {
                   onPressed: _resetField,
                   iconSize: 50,
                 ),
-              ),
+              ),*/
             ],
           ),
         ),
